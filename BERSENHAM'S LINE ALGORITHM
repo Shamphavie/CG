@@ -1,0 +1,31 @@
+#include <graphics.h>
+#include <conio.h>
+
+void drawLine(int x1, int y1, int x2, int y2) {
+    int dx = x2 - x1, dy = y2 - y1;
+    int p = 2 * dy - dx;
+    int x = x1, y = y1;
+
+    putpixel(x, y, WHITE);
+    while (x < x2) {
+        x++;
+        if (p < 0) {
+            p = p + 2 * dy;
+        } else {
+            y++;
+            p = p + 2 * dy - 2 * dx;
+        }
+        putpixel(x, y, WHITE);
+    }
+}
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+
+    drawLine(100, 100, 300, 200);  // Draw a line using Bresenham’s algorithm
+
+    getch();
+    closegraph();
+    return 0;
+}
