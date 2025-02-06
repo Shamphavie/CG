@@ -1,0 +1,17 @@
+#include <graphics.h>
+#include <conio.h>
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+
+    setlinestyle(SOLID_LINE, 0, 3);  // Solid line, thickness 3
+    line(100, 100, 200, 200);
+
+    setlinestyle(DASHED_LINE, 0, 2);  // Dashed line, thickness 2
+    line(200, 100, 300, 200);
+
+    getch();
+    closegraph();
+    return 0;
+}
