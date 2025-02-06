@@ -1,0 +1,39 @@
+#include <SFML/Graphics.hpp>
+
+int main() {
+    // Create a window with title and size
+    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Animation");
+
+    // Create a rectangle
+    sf::RectangleShape rectangle(sf::Vector2f(100, 50));
+    rectangle.setFillColor(sf::Color::Yellow);
+    rectangle.setPosition(0, 275);  // Start position
+
+    // Speed of movement
+    float speed = 2.0f;
+
+    // Main loop to keep the window open
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+        }
+
+        // Move the rectangle
+        rectangle.move(speed, 0);
+
+        // If the rectangle goes off the screen, reset its position
+        if (rectangle.getPosition().x > 800) {
+            rectangle.setPosition(0, 275);
+        }
+
+        // Clear the window, draw the rectangle, and display everything
+        window.clear();
+        window.draw(rectangle);
+        window.display();
+    }
+
+    return 0;
+}
