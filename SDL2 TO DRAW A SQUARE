@@ -1,0 +1,57 @@
+#include <SDL2/SDL.h>
+
+int main() {
+    // Initialize SDL
+    if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+        printf("SDL_Init Error: %s\n", SDL_GetError());
+        return 1;
+    }
+
+    // Create a window
+    SDL_Window *window = SDL_CreateWindow("SDL Square", 100, 100, 800, 600, SDL_WINDOW_SHOWN);
+    if (window == NULL) {
+        printf("SDL_CreateWindow Error: %s\n", SDL_GetError());
+        SDL_Quit();
+        return 1;
+    }
+
+    // Create a renderer
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    if (renderer == NULL) {
+        printf("SDL_CreateRenderer Error: %s\n", SDL_GetError());
+        SDL_DestroyWindow(window);
+        SDL_Quit();
+        return 1;
+    }
+
+    // Set the drawing color to blue
+    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+
+    // Main loop to keep the window open
+    SDL_Event e;
+    bool quit = false;
+    while (!quit) {
+        while (SDL_PollEvent(&e)) {
+            if (e.type == SDL_QUIT) {
+                quit = true;
+            }
+        }
+
+        // Clear the screen with black
+        SDL_RenderClear(renderer);
+
+        // Draw a square
+        SDL_Rect rect = {350, 250, 100, 100};
+        SDL_RenderFillRect(renderer, &rect);
+
+        // Present the rendered image
+        SDL_RenderPresent(renderer);
+    }
+
+    // Clean up and quit
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
