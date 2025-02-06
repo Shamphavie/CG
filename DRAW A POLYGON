@@ -1,0 +1,14 @@
+#include <graphics.h>
+#include <conio.h>
+
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "");
+
+    int points[] = {200, 100, 250, 150, 200, 200, 150, 150};  // Coordinates of the polygon
+    fillpoly(4, points);  // Draws a polygon with 4 points
+
+    getch();
+    closegraph();
+    return 0;
+}
